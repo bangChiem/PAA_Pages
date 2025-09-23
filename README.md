@@ -1,16 +1,27 @@
-# React + Vite
+# TCNJ Pan Asian Alliance (PAA) Webpage
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 About  
+This project hosts the official webpage for the **TCNJ Pan Asian Alliance (PAA)**.  
+The site serves as a central hub for students, faculty, and community members to access information about PAA’s mission, events, resources, and leadership.  
 
-Currently, two official plugins are available:
+## 🌏 Purpose  
+- Share **PAA’s mission and goals** with the TCNJ community  
+- Provide updates on **events, initiatives, and collaborations**  
+- Offer resources for students interested in Pan Asian identity, culture, and advocacy  
+- Create an accessible space for **membership and contact information**  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🖥️ Features  
+- **Home Page**: Introduction and mission statement  
+- **Events Page**: Upcoming and past events, including flyers and recaps  
+- **Resources Page**: Links to cultural, academic, and advocacy resources  
+- **Leadership Page**: Profiles of the current E-board and advisors  
+- **Contact Page**: How to join, reach out, or collaborate  
 
-## React Compiler
+## 🛠️ Tech Stack  
+- HTML, CSS, JavaScript (or React, if used)  
+- Hosting via GitHub Pages / Netlify / TCNJ server (specify here)  
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📬 Contact  
+For questions, collaborations, or membership inquiries, reach out to:  
+📧 **vsa@tcnj.edu**  
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
