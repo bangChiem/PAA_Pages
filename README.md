@@ -12,14 +12,9 @@ The site serves as a central hub for students, faculty, and community members to
 
 ## 🖥️ Features  
 - **Home Page**: Introduction and mission statement  
-- **Events Page**: Upcoming and past events, including flyers and recaps  
-- **Resources Page**: Links to cultural, academic, and advocacy resources  
-- **Leadership Page**: Profiles of the current E-board and advisors  
+- **Events Page**: Upcoming and past events, including flyers and recaps   
 - **Contact Page**: How to join, reach out, or collaborate  
-
-## 🛠️ Tech Stack  
-- HTML, CSS, JavaScript (or React, if used)  
-- Hosting via GitHub Pages / Netlify / TCNJ server (specify here)  
+ 
 
 ## 📬 Contact  
 For questions, collaborations, or membership inquiries, reach out to:  
