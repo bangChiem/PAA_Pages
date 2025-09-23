@@ -1,0 +1,84 @@
+/* components/Card.css */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #f8f9fa;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    max-height: 400px; /* Prevent images from being too tall */
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover .card-image {
+    transform: scale(1.02);
+  }
+  
+  .card-caption {
+    padding: 1rem;
+    flex-shrink: 0; /* Prevent caption from shrinking */
+    border-top: 1px solid #e9ecef;
+  }
+  
+  .card-caption p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    line-height: 1.4;
+    width: 100%;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .card-caption {
+      padding: 0.75rem;
+    }
+    
+    .card-caption p {
+      font-size: 0.9rem;
+    }
+    
+    .card-image {
+      max-height: 350px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .card-caption {
+      padding: 0.5rem;
+    }
+    
+    .card-caption p {
+      font-size: 0.85rem;
+    }
+    
+    .card-image {
+      max-height: 300px;
+    }
+  }

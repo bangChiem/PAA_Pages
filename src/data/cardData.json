@@ -1,0 +1,28 @@
+{
+    "cards": [
+      {
+        "id": 1,
+        "imageUrl": "/src/assets/images/VSA_GBM4.jpg",
+        "caption": "GBM #4 ⁉️⁉️ HII VSA BAES !! please join us at BSC 104 to meet up then PLAY BADMINTON WITH USSSS 🏸🏸✨✨ see you guys there 😼🫵",
+        "altText": "VSA GBM#4"
+      },
+      {
+        "id": 2,
+        "imageUrl": "src/assets/images/Saigon_Stationary.webp",
+        "caption": "ATTENTION VSA BAES ⁉️⁉️⁉️ we will be selling stationary items, plushies and cute items so PLEASE CHECK IT OUT ON Sept 22-23 🫡🫡 SEE YOU GUYS THERE 🙌🙌",
+        "altText": "Saigon Stationary"
+      },
+      {
+        "id": 3,
+        "imageUrl": "src/assets/images/VSA_GBM3.webp",
+        "caption": "HII GUYSS 🙂‍↕️🙂‍↕️ join us at our third GBM: Ham Choi at 7-8 pm in BSC 222 in which we would be playing with some snack games 👀👀 SEE YOU GUYS THEREE !! 🙌🙌",
+        "altText": "VSA GBM#3"
+      },
+      {
+        "id": 4,
+        "imageUrl": "src/assets/images/VSA_GBM2.jpg",
+        "caption": "GBM2 • KSAxJSAxVSA Volleyball! what up y'all! hope your 🏐 skills are ready for our next GBM this Wednesday, 9/10 from 2-4pm with @tcnj_jsa and @tcnjvsa ! come play or vibe with us and cheer on your friends! we will be meeting at BSC224 and walking together to the sand courts! hope to see you there👀‼️",
+        "altText": "VSA GBM #2"
+      }
+    ]
+  }
