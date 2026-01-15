@@ -1,0 +1,6 @@
+CREATE TABLE cards (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  imageUrl TEXT NOT NULL,
+  caption TEXT NOT NULL,
+  altText TEXT
+);
