@@ -3,3 +3,4 @@ build/
 .env
 todo.txt
 package-lock.json
+posts.db
