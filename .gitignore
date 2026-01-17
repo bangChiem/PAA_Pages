@@ -1,0 +1,7 @@
+node_modules/
+build/
+.env
+todo.txt
+package-lock.json
+posts.db
+package-lock.json
