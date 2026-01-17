@@ -4,10 +4,14 @@ import crypto from "crypto";
 import dotenv from "dotenv";
 import { createDb } from "./db.js";
 
+dotenv.config();
+
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+const ADMIN_USER = process.env.ADMIN_USER;
+const ADMIN_PASS = process.env.ADMIN_PASS;
+const activeTokens = new Set();
 const db = createDb("./posts.db");
 app.set("db", db);
 
