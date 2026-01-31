@@ -2,18 +2,90 @@ import express from "express";
 import cors from "cors";
 import crypto from "crypto";
 import dotenv from "dotenv";
-import { createDb } from "./db.js";
+import dbModule from "./db.js";
 
-dotenv.config();
+// db.js uses CommonJS exports; the default import contains the exported functions
+const { createDb, createPost, getAllPosts, getPostById, updatePost, deletePost, closeDb } = dbModule;
+
+dotenv.config({ path: "../.env" });
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 const ADMIN_USER = process.env.ADMIN_USER;
 const ADMIN_PASS = process.env.ADMIN_PASS;
+console.log(ADMIN_USER, ADMIN_PASS);
 const activeTokens = new Set();
 const db = createDb("./posts.db");
 app.set("db", db);
+
+// --- CRUD endpoints for posts ---
+
+// Read all posts
+app.get("/posts", async (req, res) => {
+  try {
+    const rows = await getAllPosts(db);
+    res.json({ ok: true, posts: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: "Failed to fetch posts" });
+  }
+});
+
+// Read single post
+app.get("/posts/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const row = await getPostById(db, id);
+    if (!row) return res.status(404).json({ ok: false, error: "Post not found" });
+    res.json({ ok: true, post: row });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: "Failed to fetch post" });
+  }
+});
+
+// Create post (protected)
+app.post("/posts", requireAdmin, async (req, res) => {
+  try {
+    const { username, caption, thumbnail, url } = req.body ?? {};
+    if (!username || !caption || !thumbnail || !url) {
+      return res.status(400).json({ ok: false, error: "Missing required fields" });
+    }
+    const id = await createPost(db, username, caption, thumbnail, url);
+    res.status(201).json({ ok: true, id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: "Failed to create post" });
+  }
+});
+
+// Update post (protected)
+app.put("/posts/:id", requireAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const { username, caption, thumbnail, url } = req.body ?? {};
+    const changes = await updatePost(db, id, username, caption, thumbnail, url);
+    if (changes === 0) return res.status(404).json({ ok: false, error: "Post not found" });
+    res.json({ ok: true, changed: changes });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: "Failed to update post" });
+  }
+});
+
+// Delete post (protected)
+app.delete("/posts/:id", requireAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const changes = await deletePost(db, id);
+    if (changes === 0) return res.status(404).json({ ok: false, error: "Post not found" });
+    res.json({ ok: true, deleted: changes });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: "Failed to delete post" });
+  }
+});
 
 app.get("/health", (req, res) => {
   res.status(200).json({ ok: true, status: "running" });
@@ -24,9 +96,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/auth/login", (req, res) => {
-  const { username, password } = req.body ?? {};
+  const { email, password } = req.body ?? {};
 
-  if (username !== ADMIN_USER || password !== ADMIN_PASS) {
+  if (email !== ADMIN_USER || password !== ADMIN_PASS) {
     return res.status(401).json({ ok: false, error: "Invalid credentials" });
   }
 
