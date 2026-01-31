@@ -99,12 +99,12 @@ function createPost(db, username, caption, thumbnail, url) {
  * @param {object} db - The sqlite3 database object.
  * @returns {Promise<Array<object>>} A list of user objects.
  */
-function getAllPosts(db) {
-  const sql = `SELECT * FROM posts`;
+function getAllPosts(db, limit = 10, offset = 0) {
+  const sql = `SELECT * FROM posts ORDER BY id DESC LIMIT ? OFFSET ?`;
   return new Promise((resolve, reject) => {
-    db.all(sql, [], (err, rows) => {
+    db.all(sql, [limit, offset], (err, rows) => {
       if (err) {
-        console.error('Error in getAllUsers:', err.message);
+        console.error('Error in getAllPosts:', err.message);
         reject(err);
       } else {
         resolve(rows);

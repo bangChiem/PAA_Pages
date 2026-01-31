@@ -25,8 +25,15 @@ app.set("db", db);
 // Read all posts
 app.get("/posts", async (req, res) => {
   try {
-    const rows = await getAllPosts(db);
-    res.json({ ok: true, posts: rows });
+    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+    const limitQuery = parseInt(req.query.limit, 10);
+    const DEFAULT_LIMIT = 10;
+    const MAX_LIMIT = 100;
+    const limit = Number.isInteger(limitQuery) && limitQuery > 0 ? Math.min(limitQuery, MAX_LIMIT) : DEFAULT_LIMIT;
+    const offset = (page - 1) * limit;
+
+    const rows = await getAllPosts(db, limit, offset);
+    res.json({ ok: true, posts: rows, page, limit });
   } catch (err) {
     console.error(err);
     res.status(500).json({ ok: false, error: "Failed to fetch posts" });
