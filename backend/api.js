@@ -14,7 +14,8 @@ app.use(cors());
 app.use(express.json());
 const ADMIN_USER = process.env.ADMIN_USER;
 const ADMIN_PASS = process.env.ADMIN_PASS;
-console.log(ADMIN_USER, ADMIN_PASS);
+const API_KEY = process.env.API_KEY;
+console.log(ADMIN_USER, ADMIN_PASS, API_KEY);
 const activeTokens = new Set();
 const db = createDb("./posts.db");
 app.set("db", db);
@@ -45,7 +46,7 @@ app.get("/posts/:id", async (req, res) => {
   }
 });
 
-// Create post (protected)
+// Create post
 app.post("/posts", requireAdmin, async (req, res) => {
   try {
     const { username, caption, thumbnail, url } = req.body ?? {};
@@ -60,7 +61,7 @@ app.post("/posts", requireAdmin, async (req, res) => {
   }
 });
 
-// Update post (protected)
+// Update post
 app.put("/posts/:id", requireAdmin, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
@@ -74,7 +75,7 @@ app.put("/posts/:id", requireAdmin, async (req, res) => {
   }
 });
 
-// Delete post (protected)
+// Delete post
 app.delete("/posts/:id", requireAdmin, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
@@ -91,10 +92,6 @@ app.get("/health", (req, res) => {
   res.status(200).json({ ok: true, status: "running" });
 });
 
-app.get("/", (req, res) => {
-  res.type("text").send("API is running");
-});
-
 app.post("/auth/login", (req, res) => {
   const { email, password } = req.body ?? {};
 
@@ -109,6 +106,14 @@ app.post("/auth/login", (req, res) => {
 });
 
 function requireAdmin(req, res, next) {
+  // Check API key first (header `x-api-key` or query `api_key`)
+  const apiKey = req.headers["api_key"] || req.query.api_key;
+  console.log("recieved: ", apiKey);
+  if (apiKey === API_KEY) {
+    return next();
+  }
+
+  // Fallback to Bearer token
   const auth = req.headers.authorization || "";
   const [scheme, token] = auth.split(" ");
 
